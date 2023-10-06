@@ -2,18 +2,22 @@ import { ButtonGroup } from '@rneui/themed'
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 
-export default ({ names }) => {
+export default ({ setNumber, names }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [selectedIndexes, setSelectedIndexes] = useState([0, 2, 3])
+
+  const onChange = (selectedIndex) => {
+    setSelectedIndex(selectedIndex)
+    setNumber(selectedIndex + 1)
+  }
   return (
     <>
       <ButtonGroup
         buttons={names}
         selectedIndex={selectedIndex}
         onPress={(value) => {
-          setSelectedIndex(value)
+          onChange(value)
         }}
-        containerStyle={{ marginBottom: 20 }}
+        containerStyle={{ display: 'flex' }}
       />
     </>
   )
@@ -21,10 +25,5 @@ export default ({ names }) => {
 
 const styles = StyleSheet.create({
   subHeader: {
-    backgroundColor: '#2089dc',
-    color: 'white',
-    textAlign: 'center',
-    paddingVertical: 5,
-    marginBottom: 10
   }
 })
